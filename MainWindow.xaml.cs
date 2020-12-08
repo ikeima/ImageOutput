@@ -15,7 +15,7 @@ namespace ImageOutput
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();  
             Initizialise();
         }
 
