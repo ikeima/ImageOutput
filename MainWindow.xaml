@@ -40,6 +40,20 @@
             <Button Width="100" Height="30" Click="AddNew">
                 new
             </Button>
+
+            <ListView Name="imageList" Height="300">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding}" Width="100"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
 
        

@@ -5,15 +5,17 @@ namespace ImageOutput
     class FileLoader
     {
         public static string fileName;
-        public static string Fileload()
+        public static string[] fileNames;
+        public static string[] Fileload()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
             openFileDialog.Filter = "Image(JPG,PNG)|*.JPG;*.PNG;|All files (ALL)|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                fileName = openFileDialog.FileName;
-                return fileName;
+                fileNames = openFileDialog.FileNames;
+                return fileNames;
             }
             else return null;
         }
