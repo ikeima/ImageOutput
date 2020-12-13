@@ -4,8 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d82d7f99eb094d6b9537ec6c9667e44f" Name="Diagram1">
-        <EntityTypeShape EntityType="MarathonSystemModel.Charity" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="01c38b360a304119af95c55b0e0c2456" Name="Diagram1">
+        <EntityTypeShape EntityType="testWorkImageAppModel.imagePathTable" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testWorkImageAppModel.imageTable" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testWorkImageAppModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="testWorkImageAppModel.FK_imagePathTable_imageTable" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

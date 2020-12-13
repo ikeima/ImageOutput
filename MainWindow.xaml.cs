@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.IO;
@@ -16,53 +17,62 @@ namespace ImageOutput
         public MainWindow()
         {
             InitializeComponent();  
-            Initizialise();
+            
         }
 
         public void Initizialise()
         {
-            using (MarathonEntities db = new MarathonEntities())
-            {
-                db.Charity.Load();
+            //using (MarathonEntities db = new MarathonEntities())
+            //{
+            //    db.Charity.Load();
 
-                BitmapImage bitmapImage = new BitmapImage();
-                dgCharity.ItemsSource = db.Charity.Local.ToBindingList();
-            }
+            //    BitmapImage bitmapImage = new BitmapImage();
+            //    dgCharity.ItemsSource = db.Charity.Local.ToBindingList();
+            //}
         }
 
         private void SetImage(object sender, RoutedEventArgs e)
         {
-            string fileName = FileLoader.Fileload();
-            tblFileName.Text = fileName;
+            string[] fileNames = FileLoader.Fileload();
 
-            try
+            using (ImageEntities db = new ImageEntities())
             {
-                Bitmap bitmap = new Bitmap(fileName);
-                BitmapImage bitmapImage = new BitmapImage(new Uri(fileName));
+                for (int i = 0; i < fileNames.Length; i++)
+                {
+                    imagePathTable image = new imagePathTable
+                    {
+                        img = ImageConverter.ConvertToByte(fileNames[i])
+                    };
 
-                image.Source = bitmapImage;
+                    db.imagePathTable.Add(image);
+                }
+
+                db.SaveChanges();
             }
-            catch
+
+            BitmapImage[] images = new BitmapImage[10]; 
+            for (int i = 0; i < fileNames.Length; i++)
             {
-                MessageBox.Show("Картинку то выбери");
+                images[i] = new BitmapImage(new Uri(fileNames[i])); // Загрузка в каждый элемент массива 
             }
-            
+
+            imageList.ItemsSource = images;
         }
 
         private void AddNew(object sender, RoutedEventArgs e)
         {
-            string fileName = FileLoader.fileName;
+            //string fileName = FileLoader.fileName;
 
-            using (MarathonEntities db = new MarathonEntities())
-            {
-                Charity newCharity = new Charity()
-                {
-                    CharityName = "asdasd",
-                    CharityLogo = ImageConverter.ConvertToByte(fileName)
-                };
-                db.Charity.Add(newCharity);
-                db.SaveChanges();
-            }
+            //using (MarathonEntities db = new MarathonEntities())
+            //{
+            //    Charity newCharity = new Charity()
+            //    {
+            //        CharityName = "asdasd",
+            //        CharityLogo = ImageConverter.ConvertToByte(fileName)
+            //    };
+            //    db.Charity.Add(newCharity);
+            //    db.SaveChanges();
+            //}
         }
     }
 }
